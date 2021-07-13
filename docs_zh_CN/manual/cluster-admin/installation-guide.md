@@ -27,7 +27,7 @@ master机器用于运行核心Kubernetes组件和核心OpenPAI服务。目前，
     <td>dev box 机器</td>
     <td>
       <ul>
-        <li>它可以与所有其他机器（master和worker机器）通信。</li> 
+        <li>它可以与所有其他机器（master和worker机器）通信。</li>
         <li>它是独立于master机器和worker机器之外的一台机器。</li>
         <li>它可以访问Internet。尤其是可以访问Docker Hub。部署过程会从Docker Hub拉取Docker镜像。</li>
       </ul>
@@ -38,7 +38,7 @@ master机器用于运行核心Kubernetes组件和核心OpenPAI服务。目前，
         <li>SSH服务已开启。</li>
         <li>可以免密登录所有master和worker机器。</li>
         <li>Docker已被正确安装。</li>
-      </ul> 
+      </ul>
     </td>
   </tr>
   <tr>
@@ -116,7 +116,7 @@ hivedscheduler是OpenPAI的默认调度器，它支持虚拟集群划分，拓�
       <ul>
         <li><b>GPU驱动已被正确安装。</b> 您可以用<a href="./installation-faqs-and-troubleshooting.html#how-to-check-whether-the-gpu-driver-is-installed">这个命令</a>来检查。 如果您的GPU驱动未被正确安装，可以参考<a href="./installation-faqs-and-troubleshooting.html#how-to-install-gpu-driver">如何安装GPU驱动</a>。如果您对安装哪个版本的GPU驱动有疑问，可以阅读<a href="./installation-faqs-and-troubleshooting.html#which-version-of-nvidia-driver-should-i-install">这个文档</a>。</li>
         <li><b><a href="https://github.com/NVIDIA/nvidia-container-runtime">nvidia-container-runtime</a>已被正确安装，并且被设置为Docker的默认runtime。</b> 因为systemd的配置会在接下来安装过程中被覆盖，所以请不要在systemd里设置 docker 默认runtime，而是在<a href="https://docs.docker.com/config/daemon/#configure-the-docker-daemon">docker-config-file (daemon.json)</a>里进行设置。 您可以使用命令<code>sudo docker run --rm nvidia/cuda:10.0-base nvidia-smi</code> 来检查这一项。如果该命令成功打出当前可用的显卡个数，就说明设置是没问题的。如果它未被正确安装，请参考<a href="./installation-faqs-and-troubleshooting.html#how-to-install-nvidia-container-runtime">如何安装nvidia container runtime</a>。 我们不推荐您使用<code>nvidia-docker2</code>。 有关 <code>nvidia-container-runtime</code> 和 <code>nvidia-docker2</code> 的详细对比，请参考<a href="https://github.com/NVIDIA/nvidia-docker/issues/1268#issuecomment-632692949">这里</a>。</li>
-      </ul>  
+      </ul>
     </td>
   </tr>
   <tr>
@@ -139,7 +139,7 @@ hivedscheduler是OpenPAI的默认调度器，它支持虚拟集群划分，拓�
         <li>设备的驱动已被正确安装</li>
         <li>设备的 container runtime 已被正确安装，并且被设置为Docker的默认runtime。因为systemd的配置会在接下来安装过程中被覆盖，所以请不要在systemd里设置 docker 默认runtime，而是在<a href="https://docs.docker.com/config/daemon/#configure-the-docker-daemon">docker-config-file</a>里进行设置。</li>
         <li>您需要用一个该设备的<a href="https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/device-plugins/">device plugin</a>。在Kubernetes安装后，您需要手动将该device plugin部署在集群中。</li>
-      </ul>  
+      </ul>
     </td>
   </tr>
 </tbody>
@@ -163,7 +163,7 @@ cd pai
 checkout到某一个tag，来选择需要安装的OpenPAI版本：
 
 ```bash
-git checkout v1.7.0
+git checkout v1.8.0
 ```
 
 接下来，请编辑`<pai-code-dir>/contrib/kubespray/config`目录下的`layout.yaml`和`config.yaml`文件。
@@ -221,7 +221,7 @@ machine-list:
 ``` yaml
 user: forexample
 password: forexample
-docker_image_tag: v1.7.0
+docker_image_tag: v1.8.0
 
 # Optional
 

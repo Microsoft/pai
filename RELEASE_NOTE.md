@@ -1,5 +1,21 @@
 # OpenPAI Release Note
 
+## July 2021 (version 1.8.0)
+
+- Marketplace related update
+  - Please see [Marketplace](https://github.com/microsoft/openpaimarketplace/releases/tag/v1.8.0) for more details
+
+- Alert manager
+  - Send alert to users when job status changed #5337
+
+- Webportal
+  - Support UX of Job Priority #5417
+
+- Others
+  - Customizable Autoscaler #5412
+  - Add custom ssl port support #5386
+  - Clean up repo. Remove obsolete code #5489
+
 ## April 2021 (version 1.7.0)
 
 - Marketplace related update
@@ -11,7 +27,7 @@
   - In new submission page, the sidebar can be shrank to give the main area more visual space.
   - The new submission page moves the yaml editor into a single page, which allows user to focus on setting config or editing yaml protocol.
   - The new submission page improves the responsive design in small and medium resolution.
-  
+
   > Know Issue: Tensorboard tool is not implemented in the new submission page yet. If you need to use it, please use the old version.
 
 - Alert system enhancement

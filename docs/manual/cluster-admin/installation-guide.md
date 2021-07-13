@@ -8,7 +8,7 @@ To install OpenPAI >= `v1.0.0`, please first check [Installation Requirements](#
 
 The deployment of OpenPAI requires you to have **at least 3 separate machines**: one dev box machine, one master machine, and one worker machine.
 
-Dev box machine controls masters and workers through SSH during installation, maintenance, and uninstallation. There should be one, and only one dev box. 
+Dev box machine controls masters and workers through SSH during installation, maintenance, and uninstallation. There should be one, and only one dev box.
 
 The master machine is used to run core Kubernetes components and core OpenPAI services. Currently, OpenPAI does not support high availability and you can only specify one master machine.
 
@@ -27,7 +27,7 @@ We recommend you to use CPU-only machines for dev box and master. The detailed r
     <td>Dev Box Machine</td>
     <td>
       <ul>
-        <li>It can communicate with all other machines (master and worker machines).</li> 
+        <li>It can communicate with all other machines (master and worker machines).</li>
         <li>It is separate from the cluster which contains the master machine and worker machines.</li>
         <li>It can access the internet, especially needs to have access to the docker hub registry service or its mirror. Deployment process will pull Docker images.</li>
       </ul>
@@ -38,7 +38,7 @@ We recommend you to use CPU-only machines for dev box and master. The detailed r
         <li>SSH service is enabled.</li>
         <li>Passwordless ssh to all other machines (master and worker machines).</li>
         <li>Docker is installed.</li>
-      </ul> 
+      </ul>
     </td>
   </tr>
   <tr>
@@ -66,16 +66,16 @@ We recommend you to use CPU-only machines for dev box and master. The detailed r
 
 The worker machines are used to run jobs. You can use multiple workers during installation.
 
-We support various types of workers: CPU workers, GPU workers, and workers with other computing devices (e.g. TPU, NPU). 
+We support various types of workers: CPU workers, GPU workers, and workers with other computing devices (e.g. TPU, NPU).
 
 At the same time, we also support two schedulers: the Kubernetes default scheduler, and [hivedscheduler](https://github.com/microsoft/hivedscheduler).
 
-Hivedscheduler is the default for OpenPAI. It supports virtual cluster division, topology-aware resource guarantee, and optimized gang scheduling, which are not supported in the k8s default scheduler. 
+Hivedscheduler is the default for OpenPAI. It supports virtual cluster division, topology-aware resource guarantee, and optimized gang scheduling, which are not supported in the k8s default scheduler.
 
 
 For now, the support for CPU/NVIDIA GPU workers and workers with other computing device is different:
 
-  - For CPU workers and NVIDIA GPU workers, both k8s default scheduler and hived scheduler can be used. 
+  - For CPU workers and NVIDIA GPU workers, both k8s default scheduler and hived scheduler can be used.
   - For workers with other types of computing devices (e.g. TPU, NPU), currently, we only support the usage of the k8s default scheduler. You can only include workers with the same computing device in the cluster. For example, you can use TPU workers, but all workers should be TPU workers. You cannot use TPU workers together with GPU workers in one cluster.
 
 Please check the following requirements for different types of worker machines:
@@ -116,7 +116,7 @@ Please check the following requirements for different types of worker machines:
       <ul>
         <li><b>NVIDIA GPU Driver is installed.</b> You may use <a href="./installation-faqs-and-troubleshooting.html#how-to-check-whether-the-gpu-driver-is-installed">a command</a> to check it. Refer to <a href="./installation-faqs-and-troubleshooting.html#how-to-install-gpu-driver">the installation guidance</a> in FAQs if the driver is not successfully installed. If you are wondering which version of GPU driver you should use, please also refer to <a href="./installation-faqs-and-troubleshooting.html#which-version-of-nvidia-driver-should-i-install">FAQs</a>.</li>
         <li><b><a href="https://github.com/NVIDIA/nvidia-container-runtime">nvidia-container-runtime</a> is installed. And be configured as the default runtime of docker.</b> Please configure it in <a href="https://docs.docker.com/config/daemon/#configure-the-docker-daemon">docker-config-file (daemon.json)</a>, instead of in the systemd's config. You can use command <code>sudo docker run --rm nvidia/cuda:10.0-base nvidia-smi</code> to check it. This command should output information of available GPUs if it is setup properly. Refer to <a href="./installation-faqs-and-troubleshooting.html#how-to-install-nvidia-container-runtime">the installation guidance</a> if it is not successfully set up. We don't recommend to use <code>nvidia-docker2</code>. For a detailed comparison between <code>nvidia-container-runtime</code> and <code>nvidia-docker2</code>, please refer to <a href="https://github.com/NVIDIA/nvidia-docker/issues/1268#issuecomment-632692949">here</a>. </li>
-      </ul>  
+      </ul>
     </td>
   </tr>
   <tr>
@@ -139,7 +139,7 @@ Please check the following requirements for different types of worker machines:
         <li>The driver of the device is installed.</li>
         <li>The container runtime of the device is installed. And be configured as the default runtime of docker. Please configure it in <a href="https://docs.docker.com/config/daemon/#configure-the-docker-daemon">docker-config-file</a>, because systemd's env will be overwritten during installation.</li>
         <li>You should have a deployable <a href="https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/device-plugins/">device plugin</a> of the computing device. After the Kubernetes is set up, you should manually deploy it in cluster. </li>
-      </ul>  
+      </ul>
     </td>
   </tr>
 </tbody>
@@ -163,7 +163,7 @@ cd pai
 Choose a version to install by checkout to a specific tag:
 
 ```bash
-git checkout v1.7.0
+git checkout v1.8.0
 ```
 
 Please edit `layout.yaml` and a `config.yaml` file under `<pai-code-dir>/contrib/kubespray/config` folder.
@@ -220,7 +220,7 @@ machine-list:
 ``` yaml
 user: forexample
 password: forexample
-docker_image_tag: v1.7.0
+docker_image_tag: v1.8.0
 
 # Optional
 
@@ -236,7 +236,7 @@ docker_image_tag: v1.7.0
 # docker_cache_azure_container_name: "dockerregistry"
 # docker_cache_fs_mount_path: "/var/lib/registry"
 # docker_cache_remote_url: "https://registry-1.docker.io"
-# docker_cache_htpasswd: "" 
+# docker_cache_htpasswd: ""
 # enable_marketplace: "true"
 
 #############################################
@@ -362,7 +362,7 @@ You can run the following commands to set up kubectl on your localhost:
 ansible-playbook -i ${HOME}/pai-deploy/kubespray/inventory/pai/hosts.yml set-kubectl.yml --ask-become-pass
 ```
 
-By default, we don't set up `kubeconfig` or install `kubectl` client on the dev box machine, but we put the Kubernetes config file in `~/pai-deploy/kube/config`. You can use the config with any Kubernetes client to verify the installation. 
+By default, we don't set up `kubeconfig` or install `kubectl` client on the dev box machine, but we put the Kubernetes config file in `~/pai-deploy/kube/config`. You can use the config with any Kubernetes client to verify the installation.
 
 Also, you can use the command `ansible-playbook -i ${HOME}/pai-deploy/kubespray/inventory/pai/hosts.yml set-kubectl.yml --ask-become-pass` to set up `kubeconfig` and `kubectl` on the dev box machine. It will copy the config to `~/.kube/config` and set up the `kubectl` client. After it is executed, you can use `kubectl` on the dev box machine directly.
 

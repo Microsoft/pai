@@ -1,6 +1,6 @@
 user: forexample
 password: forexample
-docker_image_tag: v1.7.0
+docker_image_tag: v1.8.0
 
 # Optional
 
