@@ -104,10 +104,11 @@
               "refId": "A"
             },
             {
-              "expr": "avg by (job_name)(irate(task_cpu_seconds_total{job_name=~\"$job\"}[{{interval}}s])) * 100",
+              "expr": "avg by (job_name, role_name, task_index)(irate(task_cpu_seconds_total{job_name=~\"$job\"}[{{interval}}s])) * 100",
               "format": "time_series",
               "instant": false,
               "intervalFactor": 2,
+              "legendFormat": "{{'{{role_name}}'}}-{{'{{task_index}}'}}",
               "refId": "B"
             }
           ],
@@ -313,6 +314,26 @@
               "intervalFactor": 2,
               "legendFormat": "Net Out {{'{{role_name}}'}}-{{'{{task_index}}'}}",
               "refId": "B",
+              "step": 600
+            },
+            {
+              "expr": "avg by (job_name, role_name, task_index) (rate(task_network_receive_bytes_total{job_name=~\"$job\"}[{{interval}}s]))",
+              "format": "time_series",
+              "hide": false,
+              "interval": "",
+              "intervalFactor": 2,
+              "legendFormat": "Net In {{'{{role_name}}'}}-{{'{{task_index}}'}}",
+              "refId": "C",
+              "step": 600
+            },
+            {
+              "expr": "avg by (job_name, role_name, task_index) (rate(task_network_transmit_bytes_total{job_name=~\"$job\"}[{{interval}}s]))",
+              "format": "time_series",
+              "hide": false,
+              "interval": "",
+              "intervalFactor": 2,
+              "legendFormat": "Net Out {{'{{role_name}}'}}-{{'{{task_index}}'}}",
+              "refId": "D",
               "step": 600
             }
           ],

@@ -4,7 +4,6 @@
 service_type: "common"
 
 port: 9097
-scrape_interval: 30 # seconds
 metrics-cleaner:
-  job-time-to-live: 60 # seconds
-  clean-interval: 60 # seconds
+  job-time-to-live: 30 # seconds
+  clean-interval: 15 # seconds

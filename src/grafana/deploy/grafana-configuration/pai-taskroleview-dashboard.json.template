@@ -325,6 +325,26 @@
               "legendFormat": "Net Out {{'{{role_name}}'}}",
               "refId": "B",
               "step": 600
+            },
+            {
+              "expr": "avg by (job_name, role_name) (rate(task_network_receive_bytes_total{job_name=~\"$job\"}[{{interval}}s]))",
+              "format": "time_series",
+              "hide": false,
+              "interval": "",
+              "intervalFactor": 2,
+              "legendFormat": "Net In {{'{{role_name}}'}}",
+              "refId": "C",
+              "step": 600
+            },
+            {
+              "expr": "avg by (job_name, role_name) (rate(task_network_transmit_bytes_total{job_name=~\"$job\"}[{{interval}}s]))",
+              "format": "time_series",
+              "hide": false,
+              "interval": "",
+              "intervalFactor": 2,
+              "legendFormat": "Net Out {{'{{role_name}}'}}",
+              "refId": "D",
+              "step": 600
             }
           ],
           "thresholds": [],
