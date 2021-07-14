@@ -17,14 +17,15 @@ def main():
     backup_path = Path("/etc/docker/daemon.json.bk")
 
     folder_path.mkdir(parents=True, exist_ok=True)
-    target_path.touch(mode=0o666)
-    backup_path.touch(mode=0o666)
-
-    with open(str(target_path)) as f:
-        current_config = json.load(f);
-
-    with open(str(backup_path), 'w') as f:
-        json.dump(current_config, f)
+    if target_path.exists() and target_path.stat().st_size:
+        backup_path.touch(mode=0o666)
+        with open(str(target_path)) as f:
+            current_config = json.load(f)
+        with open(str(backup_path), 'w') as f:
+            json.dump(current_config, f)
+    else:
+        target_path.touch(mode=0o666)
+        current_config = {}
 
     docker_cache_mirror = "http://{}".format(args.host)
     if "registry-mirrors" in current_config:
