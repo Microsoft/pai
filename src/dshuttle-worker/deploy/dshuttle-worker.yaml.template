@@ -37,7 +37,7 @@ spec:
       - name: socket-chown
         securityContext:
           runAsUser: 0
-        image: dshuttle.azurecr.io/dshuttle/dshuttle:25037dc
+        image: dshuttle.azurecr.io/dshuttle/dshuttle:{{ cluster_cfg['dshuttle']['tag'] }}
         command: ["/bin/chown","-R", "1000:1000", "/opt/domain", "/opt/logs", "/mnt/ssd"]
         volumeMounts:
         - name: dshuttle-domain
@@ -48,7 +48,7 @@ spec:
           mountPath: /mnt/ssd
       containers:
       - name: dshuttle-worker
-        image: dshuttle.azurecr.io/dshuttle/dshuttle:25037dc
+        image: dshuttle.azurecr.io/dshuttle/dshuttle:{{ cluster_cfg['dshuttle']['tag'] }}
         imagePullPolicy: Always
         securityContext:
           runAsUser: 1000
@@ -90,7 +90,7 @@ spec:
           mountPath: /opt/alluxio/conf/log4j.properties
           subPath: log4j.properties
       - name: dshuttle-job-worker
-        image: dshuttle.azurecr.io/dshuttle/dshuttle:25037dc
+        image: dshuttle.azurecr.io/dshuttle/dshuttle:{{ cluster_cfg['dshuttle']['tag'] }}
         securityContext:
           runAsUser: 1000
           runAsGroup: 1000

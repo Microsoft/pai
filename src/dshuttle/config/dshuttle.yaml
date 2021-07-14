@@ -68,3 +68,5 @@ log:
 
 registry_username: username
 registry_password: password
+
+tag: 54cff8fc

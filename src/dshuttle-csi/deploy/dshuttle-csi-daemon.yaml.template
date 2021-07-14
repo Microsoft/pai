@@ -33,7 +33,7 @@ spec:
       initContainers:
       # This change aimed to avoid OS build file index for alluxio-fuse-fs, which will consume much disk space
       - name: change-updatedb-conf
-        image: dshuttle.azurecr.io/dshuttle/dshuttle-csi:25037dc
+        image: dshuttle.azurecr.io/dshuttle/dshuttle-csi:{{ cluster_cfg['dshuttle']['tag'] }}
         imagePullPolicy: Always
         securityContext:
           runAsUser: 0
@@ -69,7 +69,7 @@ spec:
         securityContext:
           privileged: true
           runAsUser: 0
-        image: dshuttle.azurecr.io/dshuttle/dshuttle-csi:25037dc
+        image: dshuttle.azurecr.io/dshuttle/dshuttle-csi:{{ cluster_cfg['dshuttle']['tag'] }}
         command: ["/usr/local/bin/dshuttle-csi"]
         args :
         - "--v=4"

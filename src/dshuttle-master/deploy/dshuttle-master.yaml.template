@@ -34,7 +34,7 @@ spec:
       dnsPolicy: ClusterFirstWithHostNet
       containers:
       - name: dshuttle-master
-        image: dshuttle.azurecr.io/dshuttle/dshuttle:25037dc
+        image: dshuttle.azurecr.io/dshuttle/dshuttle:{{ cluster_cfg['dshuttle']['tag'] }}
         imagePullPolicy: Always
         securityContext:
           runAsUser: 1000
@@ -69,7 +69,7 @@ spec:
           mountPath: /opt/alluxio/conf/log4j.properties
           subPath: log4j.properties
       - name: dshuttle-job-master
-        image: dshuttle.azurecr.io/dshuttle/dshuttle:25037dc
+        image: dshuttle.azurecr.io/dshuttle/dshuttle:{{ cluster_cfg['dshuttle']['tag'] }}
         imagePullPolicy: Always
         securityContext:
           runAsUser: 1000
@@ -117,7 +117,7 @@ spec:
           name: dshuttle-log-config
       initContainers:
       - name: journal-chown
-        image: dshuttle.azurecr.io/dshuttle/dshuttle:25037dc
+        image: dshuttle.azurecr.io/dshuttle/dshuttle:{{ cluster_cfg['dshuttle']['tag'] }}
         imagePullPolicy: Always
         securityContext:
           runAsUser: 0
