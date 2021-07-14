@@ -17,6 +17,7 @@
 
 // module dependencies
 const axios = require('axios');
+const logger = require('@pai/config/logger');
 
 function initConfig(msGraphUrl, accessToken) {
   return {
@@ -30,17 +31,21 @@ async function getUserGroupList(username, config) {
   let requestUrl = config.msGraphAPI;
   // eslint-disable-next-line no-constant-condition
   while (true) {
-    const response = await axios.get(requestUrl, {
-      headers: {
-        Accept: 'application/json',
-        Authorization: config.Authorization,
-      },
-    });
-    responseData.push(response.data.value);
-    if ('@odata.nextLink' in response.data) {
-      requestUrl = response.data['@odata.nextLink'];
-    } else {
-      break;
+    try {
+      const response = await axios.get(requestUrl, {
+        headers: {
+          Accept: 'application/json',
+          Authorization: config.Authorization,
+        },
+      });
+      responseData.push(response.data.value);
+      if ('@odata.nextLink' in response.data) {
+        requestUrl = response.data['@odata.nextLink'];
+      } else {
+        break;
+      }
+    } catch (err) {
+      logger.warn('request config is', config, err);
     }
   }
   const groupList = [];
