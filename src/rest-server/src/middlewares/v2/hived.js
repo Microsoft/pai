@@ -21,6 +21,7 @@ const { get, pickBy } = require('lodash');
 const createError = require('@pai/utils/error');
 const logger = require('@pai/config/logger');
 const hivedSchema = require('@pai/config/v2/hived');
+const hivedV2 = require('@pai/middlewares/v2/hived_v2');
 const { resourceUnits } = require('@pai/config/vc');
 const { hivedWebserviceUri } = require('@pai/config/launcher');
 
@@ -75,6 +76,9 @@ const getCellStatus = async (virtualCluster) => {
 };
 
 const hivedValidate = async (protocolObj, username) => {
+  if (hivedV2.isV2Schema(protocolObj)) {
+    return await hivedV2.validate(protocolObj, username);
+  }
   if (!hivedSchema.validate(protocolObj)) {
     throw createError(
       'Bad Request',

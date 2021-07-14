@@ -51,6 +51,7 @@ declare type Code =
     'NotImplementedError' |
     'NoTaskLogError' |
     'NoSupportedLogServer' |
+    'CannotReachHiveDScheduler' |
     'UnknownError';
 
 declare function createError(status: Status, code: Code, message: string): HttpError;
