@@ -38,7 +38,7 @@
     <hadoop.version>2.9.0</hadoop.version>
     <zookeeper.version>3.4.14</zookeeper.version>
     <curator.version>2.12.0</curator.version>
-    <httpcomponents.version>4.3.6</httpcomponents.version>
+    <httpcomponents.version>4.5.13</httpcomponents.version>
     <snakeyaml.version>1.18</snakeyaml.version>
     <log4j.version>1.2.17</log4j.version>
     <junit.version>4.13.1</junit.version>
