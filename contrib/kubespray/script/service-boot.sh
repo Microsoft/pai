@@ -45,7 +45,7 @@ echo "Starting OpenPAI service with dev-box..."
 sudo docker exec -w /mnt/pai dev-box-quick-start /bin/bash ./contrib/kubespray/script/start-service-in-dev-box.sh
 
 # print cluster info
-WEBPORTAL_URL=http:$(kubectl config view -o jsonpath='{.clusters[].cluster.server}' | cut -d ":" -f 2)
+WEBPORTAL_URL=http:$(sudo docker exec dev-box-quick-start kubectl config view -o jsonpath='{.clusters[].cluster.server}' | cut -d ":" -f 2)
 echo ""
 echo "OpenPAI is successfully deployed, please check the following information:"
 echo "Kubernetes cluster config :     ~/pai-deploy/kube/config"
